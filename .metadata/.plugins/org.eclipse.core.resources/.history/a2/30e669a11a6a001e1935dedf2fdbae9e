@@ -1,0 +1,16 @@
+package com.apis.product.repositoy;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.apis.product.model.PersonJava;
+
+@org.springframework.stereotype.Repository
+public interface RepositoryMet extends CrudRepository<PersonJava,Integer>{
+	
+	//return list person
+	List<PersonJava> findAll();
+	
+	PersonJava findById(int id);
+}

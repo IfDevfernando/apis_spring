@@ -1,0 +1,98 @@
+package com.apis.product.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.apis.product.model.PersonJava;
+import com.apis.product.repositoy.RepositoryMet;
+
+@RestController
+
+public class Controller {
+	
+	//routes
+	
+	@Autowired
+	private RepositoryMet action;
+	
+	@PostMapping("/api")
+	public PersonJava register(@RequestBody PersonJava p) {
+		
+		return action.save(p);
+	}
+	//return list person in web
+	@GetMapping("/api")
+	public List<PersonJava> selectPerson(){
+		return action.findAll();
+	}
+	//edit person
+	@PutMapping("/api")
+	public PersonJava editPerson(@RequestBody PersonJava p) {
+		return action.save(p);
+	}
+	//delete person
+	@DeleteMapping("/api/{codigo}")
+	public void removePerson(@PathVariable int codigo) {
+		PersonJava p=selectId(codigo);
+		action.delete(p);
+	}
+	//count person
+	@GetMapping("/api/cont")
+	public long countPerson() {
+		return action.count();
+	}
+	//search per id
+	@GetMapping("/api/{codigo}")
+	public PersonJava selectId(@PathVariable int codigo) {
+		return action.findById(codigo);
+	}
+	//order person per name
+	@GetMapping("/api/orderName")
+	public List<PersonJava> ordername(){
+		return action.findByOrderByName();
+	}
+	//list person name start with 
+	@GetMapping("/api/nameS")
+	public List<PersonJava> nameStrat(){ 
+		return action.findByNameStartsWith("a");
+		
+	}
+	//list person name end with
+	@GetMapping("/api/nameE")
+	public List<PersonJava> nameEnds(){
+		return action.findByNameEndsWith("o");
+	}
+	@GetMapping("api/nameContem")
+	public List<PersonJava> nameContem(){
+		return action.findByNameContaining("m");
+	}
+	@GetMapping("api/orderNameY")
+	public List<PersonJava> orderNamePerY(){
+		return action.findByNameOrderByYearsDesc("paula");
+	}
+	@GetMapping("/api/sum")
+	public int sumYears() {
+		return action.sumY();
+	}
+	@GetMapping("")
+	public String mensagem() {
+		return "hello world";
+	}
+	@GetMapping("/welcome/{nome}")
+	public String welcome(@PathVariable String nome) {
+		return "welcome"+nome;
+	}
+	@PostMapping("/per")
+	public PersonJava per(@RequestBody PersonJava p) {
+		return p;
+	}
+
+}

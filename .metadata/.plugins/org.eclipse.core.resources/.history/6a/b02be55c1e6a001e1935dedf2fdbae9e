@@ -1,0 +1,25 @@
+package com.apis.product.repositoy;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.apis.product.model.PersonJava;
+
+@org.springframework.stereotype.Repository
+public interface RepositoryMet extends CrudRepository<PersonJava,Integer>{
+	
+	//return list person
+	List<PersonJava> findAll();
+	
+	PersonJava findById(int id);
+	
+	List<PersonJava> findByOrderByName();
+	
+	//list person of old for young
+	List<PersonJava> findByNameOrderByYearsDesc(String name);
+	//list person per letter
+	List<PersonJava> findByNameContaining(String pp);
+	
+	List<PersonJava> findByNameStratsWith(String pp);
+}

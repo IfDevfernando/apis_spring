@@ -1,0 +1,30 @@
+package com.apis.product.model;
+
+public class PersonJava {
+	
+	private String name;
+	private int years;
+	
+	
+	
+	
+	
+	public PersonJava() {
+	 
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getYears() {
+		return years;
+	}
+	public void setYears(int years) {
+		this.years = years;
+	}
+	
+	
+
+}

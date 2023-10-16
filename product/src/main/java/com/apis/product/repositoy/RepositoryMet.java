@@ -1,0 +1,41 @@
+package com.apis.product.repositoy;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+
+import com.apis.product.model.PersonJava;
+
+@org.springframework.stereotype.Repository
+public interface RepositoryMet extends CrudRepository<PersonJava,Integer>{
+	
+	//return list person
+	List<PersonJava> findAll();
+	
+	PersonJava findById(int id);
+	
+	List<PersonJava> findByOrderByName();
+	
+	//list person of old for young
+	List<PersonJava> findByNameOrderByYearsDesc(String name);
+	//list person per letter
+	List<PersonJava> findByNameContaining(String pp);
+	//list person name ends 
+	List<PersonJava> findByNameStartsWith(String pp);
+	//list person name start 
+	List<PersonJava> findByNameEndsWith(String pp);
+	
+	//connection with bank
+	//sum years all person
+	@Query(value="SELECT SUM(years)FROM person",nativeQuery = true)
+	int sumY();
+	
+	//connection with bank
+	//value years bigger y
+	@Query(value="SELECT *FROM person WHERE years >= :y",nativeQuery = true)
+	List<PersonJava> yearsBigger(int y);
+	
+	//return id person,validation for person null,count person
+	int countById(int id);
+}

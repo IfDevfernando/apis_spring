@@ -1,0 +1,28 @@
+package com.apis.product.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.apis.product.model.PersonJava;
+
+@RestController
+
+public class Controller {
+	
+	//routes
+	PersonJava per=new PersonJava();
+	
+	@GetMapping("")
+	public String mensagem() {
+		return "hello world";
+	}
+	@GetMapping("/welcome/{nome}")
+	public String welcome(@PathVariable String nome) {
+		return "welcome"+nome;
+	}
+	public String inter() {
+		return "ola,"+per.getName();
+	}
+
+}

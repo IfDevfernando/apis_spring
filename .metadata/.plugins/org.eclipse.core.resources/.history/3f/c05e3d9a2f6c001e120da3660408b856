@@ -1,0 +1,38 @@
+package com.apis.product.servico;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.apis.product.model.Menssage;
+import com.apis.product.model.PersonJava;
+import com.apis.product.repositoy.RepositoryMet;
+
+@Service
+public class Servico {
+	
+	@Autowired
+	private Menssage menssage;
+	
+	@Autowired
+	private RepositoryMet action;
+	
+	public ResponseEntity<?> register(PersonJava p){
+		
+		//validation register null
+		if(p.getName().equals("")) {
+			menssage.setMenssage("please check your form");
+			return new ResponseEntity<>(menssage,HttpStatus.BAD_REQUEST);
+		}else if(p.getYears() < 0) {
+		//validation
+			menssage.setMenssage("please check your year");
+			return new ResponseEntity<>(menssage,HttpStatus.BAD_REQUEST);
+		}else {
+		//create success
+			
+			return new ResponseEntity<>(action.save(p),HttpStatus.CREATED);
+		}
+	}
+
+}
